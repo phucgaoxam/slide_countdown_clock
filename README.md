@@ -9,6 +9,8 @@ A Countdown clock with slide up and down animation plugin for Flutter
 To use plugin, just import package `import 'package:slide_countdown_clock/slide_countdown_clock.dart';`
 
 ## Example
+You can check example directory to know how to use it like the demo gif.
+
 ```
 import 'package:flutter/material.dart';
 import 'package:slide_countdown_clock/slide_countdown_clock.dart';
@@ -50,12 +52,6 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
-  }
-
-  void _changeValue(bool value) {
-    setState(() {
-      _value = value;
-    });
   }
 }
 
