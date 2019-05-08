@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SlideCountdownClock(
-                duration: _duration,
+                duration: Duration(seconds: 1000000),
                 slideDirection: SlideDirection.Up,
                 separator: ":",
                 textStyle: TextStyle(

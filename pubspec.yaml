@@ -1,6 +1,6 @@
 name: slide_countdown_clock
 description: A countdown clock with slide up and down animation plugin for Flutter.
-version: 1.0.0
+version: 1.0.1
 author: phuc.chau <chauminhphuc.it@gmail.com>
 homepage: https://github.com/phucgaoxam/slide_countdown_clock
 
