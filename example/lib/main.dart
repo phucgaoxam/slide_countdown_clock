@@ -4,7 +4,6 @@ import 'package:slide_countdown_clock/slide_countdown_clock.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,15 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text('Slide direction Up'),
             SlideCountdownClock(
-              duration: _duration,
+              duration: Duration(days: 20, minutes: 1000000),
               slideDirection: SlideDirection.Up,
               separator: ":",
               textStyle: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
+              shouldShowDays: true,
               onDone: () {
-                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
+                _scaffoldKey.currentState
+                    .showSnackBar(SnackBar(content: Text('Clock 1 finished')));
               },
             ),
             _buildSpace(),
@@ -65,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
               ),
               onDone: () {
-                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
+                _scaffoldKey.currentState
+                    .showSnackBar(SnackBar(content: Text('Clock 1 finished')));
               },
             ),
             _buildSpace(),
@@ -82,14 +84,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.white,
                 ),
                 separatorTextStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
                 ),
                 padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
+                decoration:
+                    BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
                 onDone: () {
-                  _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
+                  _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(content: Text('Clock 1 finished')));
                 },
               ),
             ),

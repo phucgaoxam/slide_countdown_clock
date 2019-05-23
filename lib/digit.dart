@@ -46,16 +46,8 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 450));
-
-    _slideDownDetails = Tween<Offset>(
-      begin: const Offset(0.0, -1.0),
-      end: Offset.zero,
-    );
-    _slideDownDetails2 = Tween<Offset>(
-      begin: const Offset(0.0, 0.0),
-      end: Offset(0.0, 1.0),
-    );
+    _controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 450));
     _slideDownAnimation = _controller.drive(_slideDownDetails);
     _slideDownAnimation2 = _controller.drive(_slideDownDetails2);
 
@@ -113,7 +105,10 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
             children: <Widget>[
               haveData
                   ? FractionalTranslation(
-                      translation: (widget.slideDirection == SlideDirection.Down) ? _slideDownAnimation.value : -_slideDownAnimation.value,
+                      translation:
+                          (widget.slideDirection == SlideDirection.Down)
+                              ? _slideDownAnimation.value
+                              : -_slideDownAnimation.value,
                       child: ClipRect(
                         clipper: ClipHalfRect(
                           percentage: _slideDownAnimation.value.dy,
@@ -130,7 +125,9 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
                     )
                   : SizedBox(),
               FractionalTranslation(
-                translation: (widget.slideDirection == SlideDirection.Down) ? _slideDownAnimation2.value : -_slideDownAnimation2.value,
+                translation: (widget.slideDirection == SlideDirection.Down)
+                    ? _slideDownAnimation2.value
+                    : -_slideDownAnimation2.value,
                 child: ClipRect(
                   clipper: ClipHalfRect(
                     percentage: _slideDownAnimation2.value.dy,
