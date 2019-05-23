@@ -28,10 +28,23 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  Duration _duration = Duration(seconds: 1000000);
+  Duration _duration = Duration(seconds: 4);
 
   @override
   Widget build(BuildContext context) {
+    final w = SlideCountdownClock(
+      duration: _duration,
+      slideDirection: SlideDirection.Up,
+      separator: ":",
+      textStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      onDone: () {
+        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
+      },
+    );
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(title: Text(widget.title)),
@@ -41,22 +54,16 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Slide direction Up'),
-            SlideCountdownClock(
-              duration: _duration,
-              slideDirection: SlideDirection.Up,
-              separator: ":",
-              textStyle: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-              onDone: () {
-                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
+            RaisedButton(
+              onPressed: () {
+                setState(() {});
               },
             ),
+            Text('Slide direction Up'),
+            w,
             _buildSpace(),
             Text('Slide direction Down'),
-            SlideCountdownClock(
+            /*  SlideCountdownClock(
               duration: _duration,
               slideDirection: SlideDirection.Down,
               separator: ":",
@@ -92,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),

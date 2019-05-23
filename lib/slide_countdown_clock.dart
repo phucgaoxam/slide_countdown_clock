@@ -37,26 +37,37 @@ class SlideCountdownClock extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  SlideCountdownClockState createState() => SlideCountdownClockState(duration);
+  SlideCountdownClockState createState() => SlideCountdownClockState();
 }
 
 class SlideCountdownClockState extends State<SlideCountdownClock> {
-  SlideCountdownClockState(Duration duration) {
-    timeLeft = duration;
-  }
-
+  Stream<DateTime> initStream;
   Duration timeLeft;
   Stream<DateTime> timeStream;
 
   @override
   void initState() {
     super.initState();
+
+    timeLeft = widget.duration;
+    _init();
+  }
+
+  @override
+  void didUpdateWidget(SlideCountdownClock oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    try {
+      timeLeft = widget.duration;
+    } catch (ex) {}
+
+    print('init');
     _init();
   }
 
   void _init() {
     var time = DateTime.now();
-    final initStream = Stream<DateTime>.periodic(Duration(milliseconds: 1000), (_) {
+    initStream = Stream<DateTime>.periodic(Duration(milliseconds: 1000), (_) {
       timeLeft -= Duration(seconds: 1);
       if (timeLeft.inSeconds == 0) {
         Future.delayed(Duration(milliseconds: 1000), () {
