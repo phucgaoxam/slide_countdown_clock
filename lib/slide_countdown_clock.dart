@@ -11,15 +11,34 @@ part 'package:slide_countdown_clock/digit.dart';
 part 'package:slide_countdown_clock/slide_direction.dart';
 
 class SlideCountdownClock extends StatefulWidget {
+  /// The amount of time until the event and `onDone` is called.
   final Duration duration;
+  
+  /// The style of text used for the digits
   final TextStyle textStyle;
+  
+  /// The style used for seperator between digits. I.e. `:`, `.`, `,`.
   final TextStyle separatorTextStyle;
+  
+  /// The character(s) to display between the hour divisions: `10 : 20`
   final String separator;
+  
+  /// The decoration to place on the container
   final BoxDecoration decoration;
+  
+  /// The direction in which the numerals move out in and out of view.
   final SlideDirection slideDirection;
+  
+  /// A callback that is called when the [duration] reaches 0.
   final VoidCallback onDone;
+  
+  /// The padding around the widget.
   final EdgeInsets padding;
+  
+  /// True for a label that needs added padding between characters.
   final bool tightLabel;
+  
+  /// Whether the widget should show another division for days.
   final bool shouldShowDays;
 
   SlideCountdownClock({
