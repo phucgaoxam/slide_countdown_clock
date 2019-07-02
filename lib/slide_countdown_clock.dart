@@ -221,8 +221,8 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
             Container(
               decoration: widget.decoration,
               padding: widget.tightLabel
-                  ? EdgeInsets.only(left: 3)
-                  : EdgeInsets.zero,
+                  ? EdgeInsets.zero
+                  : EdgeInsets.only(left: 3),
               child: Digit<int>(
                 padding: widget.padding,
                 itemStream: timeStream.map<int>(tensDigit),
@@ -236,8 +236,8 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
             Container(
               decoration: widget.decoration,
               padding: widget.tightLabel
-                  ? EdgeInsets.only(right: 3)
-                  : EdgeInsets.zero,
+                  ? EdgeInsets.zero
+                  : EdgeInsets.only(right: 3),
               child: Digit<int>(
                 padding: widget.padding,
                 itemStream: timeStream.map<int>(onesDigit),
