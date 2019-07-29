@@ -13,31 +13,31 @@ part 'package:slide_countdown_clock/slide_direction.dart';
 class SlideCountdownClock extends StatefulWidget {
   /// The amount of time until the event and `onDone` is called.
   final Duration duration;
-  
+
   /// The style of text used for the digits
   final TextStyle textStyle;
-  
+
   /// The style used for seperator between digits. I.e. `:`, `.`, `,`.
   final TextStyle separatorTextStyle;
-  
+
   /// The character(s) to display between the hour divisions: `10 : 20`
   final String separator;
-  
+
   /// The decoration to place on the container
   final BoxDecoration decoration;
-  
+
   /// The direction in which the numerals move out in and out of view.
   final SlideDirection slideDirection;
-  
+
   /// A callback that is called when the [duration] reaches 0.
   final VoidCallback onDone;
-  
+
   /// The padding around the widget.
   final EdgeInsets padding;
-  
+
   /// True for a label that needs added padding between characters.
   final bool tightLabel;
-  
+
   /// Whether the widget should show another division for days.
   final bool shouldShowDays;
 
@@ -63,13 +63,12 @@ class SlideCountdownClock extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  SlideCountdownClockState createState() =>
-      SlideCountdownClockState(duration, shouldShowDays, shouldShowHours);
+  SlideCountdownClockState createState() => SlideCountdownClockState(duration, shouldShowDays, shouldShowHours);
 }
 
 class SlideCountdownClockState extends State<SlideCountdownClock> {
-  SlideCountdownClockState(Duration duration, bool shouldShowDays, bool shouldShowHours) :
-        this.shouldShowDays = shouldShowDays,
+  SlideCountdownClockState(Duration duration, bool shouldShowDays, bool shouldShowHours)
+      : this.shouldShowDays = shouldShowDays,
         this.shouldShowHours = shouldShowHours {
     timeLeft = duration;
 
@@ -131,9 +130,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
       children: <Widget>[
         (shouldShowDays) ? _buildDayDigits() : SizedBox(),
         (shouldShowDays) ? _buildSpace() : SizedBox(),
-        (widget.separator.isNotEmpty && shouldShowDays)
-            ? _buildSeparator()
-            : SizedBox(),
+        (widget.separator.isNotEmpty && shouldShowDays) ? _buildSeparator() : SizedBox(),
         (shouldShowHours) ? _buildHourDigits() : SizedBox(),
         (shouldShowHours) ? _buildSpace() : SizedBox(),
         (widget.separator.isNotEmpty && shouldShowHours) ? _buildSeparator() : SizedBox(),
@@ -171,19 +168,18 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
   }
 
   Widget _buildDigitForLargeNumber(
-      Stream<DateTime> timeStream,
-      List<Function> digits,
-      DateTime startTime,
-      String id,
-      ) {
+    Stream<DateTime> timeStream,
+    List<Function> digits,
+    DateTime startTime,
+    String id,
+  ) {
     String timeLeftString = timeLeft.inDays.toString();
     List<Widget> rows = [];
     for (int i = 0; i < timeLeftString.toString().length; i++) {
       rows.add(
         Container(
           decoration: widget.decoration,
-          padding:
-          widget.tightLabel ? EdgeInsets.only(left: 3) : EdgeInsets.zero,
+          padding: widget.tightLabel ? EdgeInsets.only(left: 3) : EdgeInsets.zero,
           child: Digit<int>(
             padding: widget.padding,
             itemStream: timeStream.map<int>(digits[i]),
@@ -211,10 +207,10 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
   }
 
   Widget _buildHourDigits() {
-   return _buildDigit(
+    return _buildDigit(
       timeStream,
-          (DateTime time) => (timeLeft.inHours % 24) ~/ 10,
-          (DateTime time) => (timeLeft.inHours % 24) % 10,
+      (DateTime time) => (timeLeft.inHours % 24) ~/ 10,
+      (DateTime time) => (timeLeft.inHours % 24) % 10,
       DateTime.now(),
       "Hours",
     );
@@ -226,16 +222,14 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
     if (timeLeft.inDays > 99) {
       List<Function> digits = [];
       for (int i = timeLeft.inDays.toString().length - 1; i >= 0; i--) {
-        digits.add((DateTime time) =>
-            ((timeLeft.inDays) ~/ math.pow(10, i) % math.pow(10, 1)).toInt());
+        digits.add((DateTime time) => ((timeLeft.inDays) ~/ math.pow(10, i) % math.pow(10, 1)).toInt());
       }
-      dayDigits = _buildDigitForLargeNumber(
-          timeStream, digits, DateTime.now(), 'daysHundreds');
+      dayDigits = _buildDigitForLargeNumber(timeStream, digits, DateTime.now(), 'daysHundreds');
     } else {
       dayDigits = _buildDigit(
         timeStream,
-            (DateTime time) => (timeLeft.inDays) ~/ 10,
-            (DateTime time) => (timeLeft.inDays) % 10,
+        (DateTime time) => (timeLeft.inDays) ~/ 10,
+        (DateTime time) => (timeLeft.inDays) % 10,
         DateTime.now(),
         "Days",
       );
@@ -261,9 +255,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
           children: [
             Container(
               decoration: widget.decoration,
-              padding: widget.tightLabel
-                  ? EdgeInsets.zero
-                  : EdgeInsets.only(left: 3),
+              padding: widget.tightLabel ? EdgeInsets.zero : EdgeInsets.only(left: 3),
               child: Digit<int>(
                 padding: widget.padding,
                 itemStream: timeStream.map<int>(tensDigit),
@@ -276,9 +268,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
             ),
             Container(
               decoration: widget.decoration,
-              padding: widget.tightLabel
-                  ? EdgeInsets.zero
-                  : EdgeInsets.only(right: 3),
+              padding: widget.tightLabel ? EdgeInsets.zero : EdgeInsets.only(right: 3),
               child: Digit<int>(
                 padding: widget.padding,
                 itemStream: timeStream.map<int>(onesDigit),
