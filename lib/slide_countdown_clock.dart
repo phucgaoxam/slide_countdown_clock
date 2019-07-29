@@ -209,8 +209,8 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
   Widget _buildHourDigits() {
     return _buildDigit(
       timeStream,
-      (DateTime time) => (timeLeft.inHours % 24) ~/ 10,
-      (DateTime time) => (timeLeft.inHours % 24) % 10,
+      (DateTime time) => shouldShowDays ? (timeLeft.inHours % 24) ~/ 10 : timeLeft.inHours ~/ 10,
+      (DateTime time) => shouldShowDays ? (timeLeft.inHours % 24) % 10 : timeLeft.inHours % 10,
       DateTime.now(),
       "Hours",
     );
