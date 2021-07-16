@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
               ),
               shouldShowDays: true,
+              shouldShowHours: true,
               onDone: () {
                 _scaffoldKey.currentState
                     .showSnackBar(SnackBar(content: Text('Clock 1 finished')));

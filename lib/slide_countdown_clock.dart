@@ -41,6 +41,11 @@ class SlideCountdownClock extends StatefulWidget {
   /// Whether the widget should show another division for days.
   final bool shouldShowDays;
 
+
+  //// for handling issue #15
+  /// Whether the widget should show another division for hours.
+  final bool shouldShowHours;
+
   SlideCountdownClock({
     Key key,
     @required this.duration,
@@ -55,25 +60,32 @@ class SlideCountdownClock extends StatefulWidget {
     this.slideDirection: SlideDirection.Down,
     this.onDone,
     this.shouldShowDays: false,
+    this.shouldShowHours: true,
     this.padding: EdgeInsets.zero,
   }) : super(key: key);
 
   @override
   SlideCountdownClockState createState() =>
-      SlideCountdownClockState(duration, shouldShowDays);
+      SlideCountdownClockState(duration, shouldShowDays,shouldShowHours);
 }
 
 class SlideCountdownClockState extends State<SlideCountdownClock> {
-  SlideCountdownClockState(Duration duration, bool shouldShowDays) {
+  SlideCountdownClockState(Duration duration, bool shouldShowDays,bool shouldShowHours) {
     timeLeft = duration;
     this.shouldShowDays = shouldShowDays;
-
+    this.shouldShowHours = shouldShowHours;
     if (timeLeft.inHours > 99) {
       this.shouldShowDays = true;
+      this.shouldShowHours = true;
+
+    }
+    if (timeLeft.inMinutes > 59){
+      this.shouldShowHours = true;
     }
   }
 
   bool shouldShowDays;
+  bool shouldShowHours;
   Duration timeLeft;
   Stream<DateTime> initStream;
   Stream<DateTime> timeStream;
@@ -140,15 +152,16 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
         (widget.separator.isNotEmpty && shouldShowDays)
             ? _buildSeparator()
             : SizedBox(),
+        (shouldShowHours) ?
         _buildDigit(
           timeStream,
           (DateTime time) => (timeLeft.inHours % 24) ~/ 10,
           (DateTime time) => (timeLeft.inHours % 24) % 10,
           DateTime.now(),
           "Hours",
-        ),
+        ) : SizedBox(),
         _buildSpace(),
-        (widget.separator.isNotEmpty) ? _buildSeparator() : SizedBox(),
+        (widget.separator.isNotEmpty && shouldShowHours) ? _buildSeparator() : SizedBox(),
         _buildSpace(),
         _buildDigit(
           timeStream,
