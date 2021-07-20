@@ -131,10 +131,10 @@
       "name": "slide_countdown_clock",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.0"
+      "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-07-20T15:40:59.534353Z",
+  "generated": "2021-07-20T15:43:54.208120Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

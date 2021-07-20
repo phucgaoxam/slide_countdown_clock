@@ -26,13 +26,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
   Duration _duration = Duration(seconds: 1000000);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
+      key: scaffoldMessengerKey,
       appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
@@ -43,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text('Slide direction Up'),
             SlideCountdownClock(
               duration: Duration(days: 20, minutes: 1000000),
-              slideDirection: SlideDirection.Up,
+              slideDirection: SlideDirection.up,
               separator: ":",
               textStyle: TextStyle(
                 fontSize: 20,
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               shouldShowDays: true,
               onDone: () {
-                _scaffoldKey.currentState
+                scaffoldMessengerKey.currentState
                     .showSnackBar(SnackBar(content: Text('Clock 1 finished')));
               },
             ),
@@ -59,14 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Text('Slide direction Down'),
             SlideCountdownClock(
               duration: _duration,
-              slideDirection: SlideDirection.Down,
+              slideDirection: SlideDirection.down,
               separator: ":",
               textStyle: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
               onDone: () {
-                _scaffoldKey.currentState
+                scaffoldMessengerKey.currentState
                     .showSnackBar(SnackBar(content: Text('Clock 1 finished')));
               },
             ),
@@ -76,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.all(10),
               child: SlideCountdownClock(
                 duration: _duration,
-                slideDirection: SlideDirection.Up,
+                slideDirection: SlideDirection.up,
                 separator: "-",
                 textStyle: TextStyle(
                   fontSize: 20,
@@ -92,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration:
                     BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
                 onDone: () {
-                  _scaffoldKey.currentState.showSnackBar(
+                  scaffoldMessengerKey.currentState.showSnackBar(
                       SnackBar(content: Text('Clock 1 finished')));
                 },
               ),
