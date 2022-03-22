@@ -3,12 +3,15 @@
 A Countdown clock with slide up and down animation plugin for Flutter
 
 ## Demo
+
 ![Demo: ](demo.gif)
 
 ## Usage
+
 To use plugin, just import package `import 'package:slide_countdown_clock/slide_countdown_clock.dart';`
 
 ## Example
+
 You can check example directory to know how to use it like the demo gif.
 
 ```dart
@@ -63,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
-              shouldShowDay: true,
+              shouldShowDays: true,
               onDone: () {
                 _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Clock 1 finished')));
               },
